@@ -1,0 +1,23 @@
+.wrapper {
+    display: flex;
+    height: 72px;
+    padding: 0px 32px;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-right: auto;
+    gap: 12px;
+}
+
+.navbarMenu {
+    display: flex;
+    flex: 1;
+    gap: 48px;
+    margin-left: 10px;
+    justify-content: flex-start;
+    min-width: 300px;
+}
