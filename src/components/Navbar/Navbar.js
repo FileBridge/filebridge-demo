@@ -6,7 +6,7 @@ import styles from "./Navbar.module.css";
 export const Navbar = () => {
   console.log(styles)
 
-  const [value, setValue] = useState('bridge')
+  const [value, setValue] = useState('Bridge');
 
   const handleOnClick = (e) => {
     setValue(e.target.innerHTML);
@@ -47,7 +47,7 @@ const Spacer = styled.div`
 `
 
 const Block = styled.div`
-  min-width: 100px;
+  width: 100px;
 `
 const NavLink = styled.a`
   font-size: 1.125rem;
