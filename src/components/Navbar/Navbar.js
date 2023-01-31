@@ -53,11 +53,12 @@ const NavLink = styled.a`
   font-size: 1.125rem;
   color: var(--color);
   font-weight: var(--font-weight);
+  cursor: pointer;
 `
 const Nav = styled.nav`
   display: flex;
   gap: 48px;
   font-weight: 300;
   margin-left: 30px;
-  cursor: pointer;
+  
  `

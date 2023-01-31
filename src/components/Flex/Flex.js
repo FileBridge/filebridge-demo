@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components';
 
-export const Flex = ({children, padding, paddingRight}) => {
+const Flex = ({children, padding, paddingRight}) => {
   return (
     <FlexWrapper padding={padding} paddingRight={paddingRight}> {children} </FlexWrapper>
   )
 }
+
+export default Flex;
 
 const FlexWrapper = styled.div`
     display: flex;

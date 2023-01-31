@@ -12,7 +12,7 @@ import { FileBridge } from './FileBridge';
 function App() {
 
   const { chains, provider } = configureChains(
-    [mainnet, polygon, filecoin, filecoinHyperspace],
+    [polygon, filecoin, filecoinHyperspace],
     [
       alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
       publicProvider()
