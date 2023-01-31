@@ -1,17 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { useBalance, useAccount, useNetwork } from 'wagmi';
+import { chains } from '../../../constants/chains.js';
+import { currencies } from '../../../constants/currencies.js';
 import { FlexCol, Flex } from '../../Flex/index.js'
 
-export const ChainSelector = () => {
-    const { address, isConnecting, isDisconnected } = useAccount()
+export const ChainSelector = ({ defaultChain, defaultCurrency }) => {
+    const { address, isConnecting, isDisconnected, isConnected } = useAccount()
     const { chain } = useNetwork()
     const balance = useBalance({
         address: address
     })
 
     const [value, setValue] = useState('')
-
+    const [selectedChain, setSelectedChain] = useState(defaultChain)
+    const [selectedCurrency, setSelectedCurrency] = useState(defaultCurrency)
     const setMaxCurrency = () => {
         setValue(balance?.data?.formatted)
     }
@@ -24,26 +27,37 @@ export const ChainSelector = () => {
         }
     }
 
+    useEffect(() => {
+
+        setSelectedChain(defaultChain)
+        setSelectedCurrency(defaultCurrency)
+
+    }, [defaultChain])
+
+
     return (
         <Wrapper>
             <ChainInformation>
                 <Flex>
-                    <img src={`/assets/${chain?.network}.svg`} width={34} height={34} />
-                    <select>
-                        <option value={chain?.network} title={chain?.id}>{chain?.name}</option>
+                    <img src={selectedChain.icon} width={34} height={34} />
+                    <select defaultValue={selectedChain?.network}>
+                        {chains.map((chain) => (
+                            <option value={chain?.network} title={chain?.id} onSelect={() => setSelectedChain(chain)}>{chain?.network}</option>
 
-                        <option value={'Filecoin'} title={'22323'}>Mumbai chain</option>
+                        ))}
                     </select>
-                    <p>Balance: <span>{balance?.data?.formatted + ' ' + balance?.data?.symbol}</span></p>
+                    <p>Balance: <span>{(isConnected && selectedChain?.id == chain.id) ? (balance?.data?.formatted + ' ' + balance?.data?.symbol) : (0)}</span></p>
                 </Flex>
             </ChainInformation>
             <CurrencyData>
                 <Flex>
-                    <img src={`/assets/${chain?.network}.svg`} width={34} height={34} />
-                    <SelectCurrency>
-                        <option>FIL</option>
+                    <img src={selectedCurrency?.icon} width={34} height={34} />
+                    <SelectCurrency defaultValue={selectedCurrency?.currency}>
+                        {currencies.map((currency) => (
+                            <option value={currency?.currency} onSelect={() => setSelectedChain(currency?.chainId)}>{currency?.currency}</option>
+                        ))}
                     </SelectCurrency>
-                    <CurrencyInput value={value == balance?.data?.formatted ? value: value} onChange={(e) => handleTokenQuantity(e.target.value)}/>
+                    <CurrencyInput value={value == balance?.data?.formatted ? value : value} onChange={(e) => handleTokenQuantity(e.target.value)} />
                     <p style={{ textDecoration: 'underline', color: '#FB118E', cursor: 'pointer', marginRight: '20px' }} onClick={() => setMaxCurrency()}>MAX</p>
                 </Flex>
             </CurrencyData>

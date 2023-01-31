@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { chains } from '../../constants/chains'
+import { currencies } from '../../constants/currencies'
 import { ConnectWallet } from '../ConnectWallet/ConnectWallet'
 import { BridgeHeader } from './BridgeHeader/BridgeHeader'
 import { BridgeType } from './BridgeType/BridgeType'
@@ -22,7 +24,7 @@ export const Bridge = () => {
                     <BridgeContent>
                         <>
                             <h1>From</h1>
-                            <ChainSelector type={type} />
+                            <ChainSelector defaultChain={chains[0]} defaultCurrency={currencies[0]}/>
                         </>
                         <>
                             <ArrowButton onClick={() => swapChains()}>
@@ -31,12 +33,14 @@ export const Bridge = () => {
                         </>
                         <>
                             <h1>To</h1>
-                            <ChainSelector />
+                            <ChainSelector defaultChain={chains[1]} defaultCurrency={currencies[2]}/>
                         </>
                         <ConnectWallet />
                     </BridgeContent>
                     :
+                    <div style={{'display': 'flex', 'flexDirection': 'column', 'height':'500px', 'justifyContent':'center'}}>
                     <h1 style={{textAlign:'center'}}>Coming soon!</h1>
+                    </div>
                 }
             </BridgeForm>
         </>
