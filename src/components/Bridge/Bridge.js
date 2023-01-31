@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { ConnectWallet } from '../ConnectWallet/ConnectWallet'
 import { BridgeHeader } from './BridgeHeader/BridgeHeader'
@@ -11,29 +11,33 @@ export const Bridge = () => {
 
     }
 
+    const [type, setType] = useState('token')
+
     return (
         <>
-            <BridgeType />
+            <BridgeType type={type} setType={setType} />
             <BridgeForm>
-            
                 <BridgeHeader />
-                <BridgeContent>
-                    <>
-                        <h1>From</h1>
-                        <ChainSelector />
-                    </>
-                    <>
-                    <ArrowButton onClick={() => swapChains()}>
-                        <img src='/assets/arrow.svg' width={24} height={24} />
-                    </ArrowButton>
-                    </>
-                    <>
-                    <h1>To</h1>
-                    <ChainSelector />
-                    </>
-                    <ConnectWallet />
-                </BridgeContent>
-
+                {type === 'token' ?
+                    <BridgeContent>
+                        <>
+                            <h1>From</h1>
+                            <ChainSelector type={type} />
+                        </>
+                        <>
+                            <ArrowButton onClick={() => swapChains()}>
+                                <img src='/assets/arrow.svg' width={24} height={24} />
+                            </ArrowButton>
+                        </>
+                        <>
+                            <h1>To</h1>
+                            <ChainSelector />
+                        </>
+                        <ConnectWallet />
+                    </BridgeContent>
+                    :
+                    <h1 style={{textAlign:'center'}}>Coming soon!</h1>
+                }
             </BridgeForm>
         </>
     )

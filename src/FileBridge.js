@@ -19,7 +19,7 @@ export const FileBridge = () => {
 
 const Oscillate = styled.div`
     width: 100%;
-    height: 900px;
+    height: calc(900px);
     scroll-behavior: smooth;
     /* height: 100vh; */
     background-image: url('/assets/oooscillate.svg');
@@ -32,8 +32,9 @@ const Oscillate = styled.div`
 `;
 
 const BridgeWrapper = styled.div`
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
 `;

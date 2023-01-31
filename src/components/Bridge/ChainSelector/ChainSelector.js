@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import { useBalance, useAccount, useNetwork } from 'wagmi';
 import { FlexCol, Flex } from '../../Flex/index.js'
@@ -10,6 +10,19 @@ export const ChainSelector = () => {
         address: address
     })
 
+    const [value, setValue] = useState('')
+
+    const setMaxCurrency = () => {
+        setValue(balance?.data?.formatted)
+    }
+
+    const handleTokenQuantity = (value) => {
+        if (value > parseInt(balance?.data?.formatted)) {
+            // setValue(balance?.data?.formatted)
+        } else {
+            setValue(value)
+        }
+    }
 
     return (
         <Wrapper>
@@ -30,8 +43,8 @@ export const ChainSelector = () => {
                     <SelectCurrency>
                         <option>FIL</option>
                     </SelectCurrency>
-                    <CurrencyInput />
-                    <p style={{ textDecoration: 'underline', color: '#FB118E', cursor: 'pointer', marginRight: '20px' }}>MAX</p>
+                    <CurrencyInput value={value == balance?.data?.formatted ? value: value} onChange={(e) => handleTokenQuantity(e.target.value)}/>
+                    <p style={{ textDecoration: 'underline', color: '#FB118E', cursor: 'pointer', marginRight: '20px' }} onClick={() => setMaxCurrency()}>MAX</p>
                 </Flex>
             </CurrencyData>
         </Wrapper>

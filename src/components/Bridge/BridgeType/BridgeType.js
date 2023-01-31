@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
 
-export const BridgeType = () => {
-
-    const [type, setType] = useState('token')
+export const BridgeType = ({type, setType}) => {
 
     return (
         <BridgeTypeWrapper>
@@ -22,11 +20,12 @@ const BridgeTypeWrapper = styled.div`
     display: flex;
     gap: 0px;
     min-width: 500px;
-    width: fit-content;
     color: white;
-    border-radius: 5px;
+    border-radius: 150px 150px 0px 0px;
     padding: 8px 12px;
     /* margin-top: -30px; */
+    margin-bottom: -40px;
+    align-self: center;
     filter:  drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
     @media (max-width: 768px) {
@@ -41,7 +40,7 @@ const Button = styled.button`
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 150px 150px 0px 0px;
     ${({ clicked }) => clicked && `
         background-color: white;
         color: #094067;
