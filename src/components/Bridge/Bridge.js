@@ -18,8 +18,8 @@ import { BridgeType } from "./BridgeType/BridgeType"
 import { ChainSelector } from "./ChainSelector/ChainSelector"
 
 import {
-    abi as FileBridgeABI,
-    address as FileBridgeAddress,
+    abi,
+    address,
 } from "../assets/FileBridge.json"
 import {
     abi as FileswapV2FactoryABI,
@@ -35,22 +35,37 @@ import { abi as TokenABI } from "../assets/Token.json"
 export const Bridge = () => {
     const swapChains = () => {}
 
-    const approve = async (spender, amount, tokenAddress) => {
-        //Approve function
-        const {
-            data: approveData,
-            write: _approve,
-            isLoading: isApproveLoading,
-            isSuccess: isApproveStarted,
-            error: approveError,
-        } = useContractWrite({
-            addressOrName: tokenAddress,
-            contractInterface: TokenABI,
-            functionName: "approve",
-        })
+    // const approve = async (spender, amount, tokenAddress) => {
+    //     //Approve function
+    //     const {
+    //         data: approveData,
+    //         write: _approve,
+    //         isLoading: isApproveLoading,
+    //         isSuccess: isApproveStarted,
+    //         error: approveError,
+    //     } = useContractWrite({
+    //         addressOrName: tokenAddress,
+    //         contractInterface: TokenABI,
+    //         functionName: "approve",
+    //     })
 
-        await _approve({ args: [spender, ethers.utils.parseEther(amount)] })
-    }
+    //     await _approve({ args: [spender, ethers.utils.parseEther(amount)] })
+    // }
+
+    // const { config: configSmartContract } = usePrepareContractWrite({
+    //     addressOrName: '0xdAd915937012Bd81326B11f1688681239F9521C1',
+    //     contractInterface: new ethers.utils.Interface(abi),
+    //     functionName: 'clu3Transaction',
+    //     args: args
+    //     // enabled: Boolean(debouncedArgs)
+    // })
+
+    // const { data, write } = useContractWrite(configSmartContract)
+
+    const contract = useContract({
+        address: address,
+        abi: abi,
+      })
 
     const [type, setType] = useState('token');
 
