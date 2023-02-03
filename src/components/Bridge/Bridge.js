@@ -13,7 +13,7 @@ export const Bridge = () => {
 
     }
 
-    const [type, setType] = useState('token')
+    const [type, setType] = useState('token');
 
     return (
         <>
