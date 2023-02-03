@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { useAccount } from 'wagmi';
 
-export const ConnectWallet = () => {
+export const ConnectWallet = ({approval, checkApproval, amount, bridge}) => {
 
     const { isDisconnected } = useAccount()
     const { openConnectModal } = useConnectModal();
@@ -11,7 +11,9 @@ export const ConnectWallet = () => {
         if (isDisconnected) {
            openConnectModal()
         } else {
-            window.open('https://bridge.wagmi.io', '_blank')
+            console.log(approval)
+            // approval?.()
+            bridge?.()
         }
     }
 

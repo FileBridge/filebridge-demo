@@ -1,14 +1,9 @@
 import { ethers } from "ethers"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import {
-    useAccount,
-    useConnect,
-    useContract,
-    useContractRead,
     useContractWrite,
-    useNetwork,
-    useWaitForTransaction,
+    usePrepareContractWrite,
 } from "wagmi"
 import { chains } from "../../constants/chains"
 import { currencies } from "../../constants/currencies"
@@ -16,56 +11,55 @@ import { ConnectWallet } from "../ConnectWallet/ConnectWallet"
 import { BridgeHeader } from "./BridgeHeader/BridgeHeader"
 import { BridgeType } from "./BridgeType/BridgeType"
 import { ChainSelector } from "./ChainSelector/ChainSelector"
-
-import {
-    abi,
-    address,
-} from "../assets/FileBridge.json"
-import {
-    abi as FileswapV2FactoryABI,
-    address as FileswapV2FactoryAddress,
-} from "../assets/FileswapV2Factory.json"
-import {
-    abi as FileswapV2Router02ABI,
-    address as FileswapV2Router02Address,
-} from "../assets/FileswapV2Router02.json"
-import { abi as FTokenABI } from "../assets/FToken.json"
-import { abi as TokenABI } from "../assets/Token.json"
+import { useFeeData } from 'wagmi'
+import bridgeContract from "../assets/FileBridge.json"
+import FileswapV2Factory from "../assets/FileswapV2Factory.json"
+import FileswapV2Router02 from "../assets/FileswapV2Router02.json"
+import FToken from "../assets/FToken.json"
+import Token from "../assets/Token.json"
 
 export const Bridge = () => {
+
     const swapChains = () => {}
+    const [maxPriorityFeePerGas, setMaxPriorityFeePerGas] = useState(0)
+    const { data, isError, isLoading } = useFeeData()
 
-    // const approve = async (spender, amount, tokenAddress) => {
-    //     //Approve function
-    //     const {
-    //         data: approveData,
-    //         write: _approve,
-    //         isLoading: isApproveLoading,
-    //         isSuccess: isApproveStarted,
-    //         error: approveError,
-    //     } = useContractWrite({
-    //         addressOrName: tokenAddress,
-    //         contractInterface: TokenABI,
-    //         functionName: "approve",
-    //     })
+    useEffect(() => {
+      setMaxPriorityFeePerGas(data?.maxPriorityFeePerGas)
+    
+      return () => {
+        setMaxPriorityFeePerGas(0)
+      }
 
-    //     await _approve({ args: [spender, ethers.utils.parseEther(amount)] })
-    // }
+    }, [data])
+    
 
-    // const { config: configSmartContract } = usePrepareContractWrite({
-    //     addressOrName: '0xdAd915937012Bd81326B11f1688681239F9521C1',
-    //     contractInterface: new ethers.utils.Interface(abi),
-    //     functionName: 'clu3Transaction',
-    //     args: args
-    //     // enabled: Boolean(debouncedArgs)
+    // FToken = Filecoin token (Wrapped Filecoin)
+    // Token = DAI token, or any other token on ERC-20 network
+    
+    // await fileBridgeContract.initialize(deployer, [guardian], 1, {
+    //     maxPriorityFeePerGas: gasData.maxPriorityFeePerGas!,
     // })
 
-    // const { data, write } = useContractWrite(configSmartContract)
-
-    const contract = useContract({
-        address: address,
-        abi: abi,
+    const { config } = usePrepareContractWrite({
+        address: Token.address,
+        abi: Token.abi,
+        functionName: 'approve',
+        args: [bridgeContract.address, ethers.utils.parseEther('1')],
       })
+   
+      // args: spender (BridgeContract address), amount (1 FToken)
+    const { config : bridgeConfig } = usePrepareContractWrite({
+        address: bridgeContract.address,
+        abi: bridgeContract.abi,
+        functionName: 'depositToken',
+        args: ['0x36140eEE3893C84886EdC687D598dBD7Cccd5534', 80001, Token.address, ethers.utils.parseEther('1')],
+    })
+
+    console.log(bridgeConfig)
+
+    const { write } = useContractWrite(config)
+    const { write : bridgeWrite } = useContractWrite(bridgeConfig)
 
     const [type, setType] = useState('token');
 
@@ -99,7 +93,7 @@ export const Bridge = () => {
                                 defaultCurrency={currencies[2]}
                             />
                         </>
-                        <ConnectWallet />
+                        <ConnectWallet approval={write} bridge={bridgeWrite}/>
                     </BridgeContent>
                 ) : (
                     <div

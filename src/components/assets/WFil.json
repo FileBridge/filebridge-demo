@@ -1,0 +1,310 @@
+{
+  "address": "0x687d2de2535b1F51B1c25cD4a9F103aEfA1FE7c9",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "guy",
+          "type": "address"
+        },
+        {
+          "name": "wad",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "src",
+          "type": "address"
+        },
+        {
+          "name": "dst",
+          "type": "address"
+        },
+        {
+          "name": "wad",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "wad",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "dst",
+          "type": "address"
+        },
+        {
+          "name": "wad",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "deposit",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        },
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "src",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "guy",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "wad",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "src",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "dst",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "wad",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "dst",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "wad",
+          "type": "uint256"
+        }
+      ],
+      "name": "Deposit",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "src",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "wad",
+          "type": "uint256"
+        }
+      ],
+      "name": "Withdrawal",
+      "type": "event"
+    }
+  ],
+  "transactionHash": "0xf2352b7935599af47a6b1d191d8e312caba01642d46aeb4885c51d4ed07b0f6b",
+  "receipt": {
+    "to": null,
+    "from": "0xa89bb95d015864200c909BAa29c60143AA4CbaD9",
+    "contractAddress": "0x687d2de2535b1F51B1c25cD4a9F103aEfA1FE7c9",
+    "transactionIndex": 1,
+    "gasUsed": "22859832",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+    "blockHash": "0xbd59f9ac6aa7e2563e6da1dd5bb3d6488940578d816e443af2d0d65170604ef3",
+    "transactionHash": "0xf2352b7935599af47a6b1d191d8e312caba01642d46aeb4885c51d4ed07b0f6b",
+    "logs": [],
+    "blockNumber": 53348,
+    "cumulativeGasUsed": "0",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "7883b6696e740569c349211c46c18825",
+  "metadata": "{\"compiler\":{\"version\":\"0.4.24+commit.e67f0147\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"guy\",\"type\":\"address\"},{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"src\",\"type\":\"address\"},{\"name\":\"dst\",\"type\":\"address\"},{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"dst\",\"type\":\"address\"},{\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"deposit\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"},{\"name\":\"\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"src\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"guy\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"src\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"dst\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"dst\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"src\",\"type\":\"address\"},{\"indexed\":false,\"name\":\"wad\",\"type\":\"uint256\"}],\"name\":\"Withdrawal\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"contracts/WFil.sol\":\"WFil\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":1000000},\"remappings\":[]},\"sources\":{\"contracts/WFil.sol\":{\"content\":\"pragma solidity ^0.4.18;\\n\\ncontract WFil {\\n    string public constant name = \\\"Wrapped Fil\\\";\\n    string public constant symbol = \\\"WFIL\\\";\\n    uint8 public constant decimals = 18;\\n\\n    event Approval(address indexed src, address indexed guy, uint wad);\\n    event Transfer(address indexed src, address indexed dst, uint wad);\\n    event Deposit(address indexed dst, uint wad);\\n    event Withdrawal(address indexed src, uint wad);\\n\\n    mapping(address => uint) public balanceOf;\\n    mapping(address => mapping(address => uint)) public allowance;\\n\\n    function() public payable {\\n        deposit();\\n    }\\n\\n    function deposit() public payable {\\n        balanceOf[msg.sender] += msg.value;\\n        Deposit(msg.sender, msg.value);\\n    }\\n\\n    function withdraw(uint wad) public {\\n        require(balanceOf[msg.sender] >= wad);\\n        balanceOf[msg.sender] -= wad;\\n        msg.sender.transfer(wad);\\n        Withdrawal(msg.sender, wad);\\n    }\\n\\n    function totalSupply() public view returns (uint) {\\n        return this.balance;\\n    }\\n\\n    function approve(address guy, uint wad) public returns (bool) {\\n        allowance[msg.sender][guy] = wad;\\n        Approval(msg.sender, guy, wad);\\n        return true;\\n    }\\n\\n    function transfer(address dst, uint wad) public returns (bool) {\\n        return transferFrom(msg.sender, dst, wad);\\n    }\\n\\n    function transferFrom(\\n        address src,\\n        address dst,\\n        uint wad\\n    ) public returns (bool) {\\n        require(balanceOf[src] >= wad);\\n\\n        if (src != msg.sender && allowance[src][msg.sender] != uint(-1)) {\\n            require(allowance[src][msg.sender] >= wad);\\n            allowance[src][msg.sender] -= wad;\\n        }\\n\\n        balanceOf[src] -= wad;\\n        balanceOf[dst] += wad;\\n\\n        Transfer(src, dst, wad);\\n\\n        return true;\\n    }\\n}\\n\",\"keccak256\":\"0x027bf25bfd7a5878b47533471672c5f956e9eb454dad60f25d586967be97edbc\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506106aa806100206000396000f3006080604052600436106100ae5763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166306fdde0381146100b8578063095ea7b31461014257806318160ddd1461018757806323b872dd146101ae5780632e1a7d4d146101e5578063313ce567146101fd57806370a082311461022857806395d89b4114610256578063a9059cbb1461026b578063d0e30db0146100ae578063dd62ed3e1461029c575b6100b66102d0565b005b3480156100c457600080fd5b506100cd61031d565b6040805160208082528351818301528351919283929083019185019080838360005b838110156101075781810151838201526020016100ef565b50505050905090810190601f1680156101345780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34801561014e57600080fd5b5061017373ffffffffffffffffffffffffffffffffffffffff60043516602435610354565b604080519115158252519081900360200190f35b34801561019357600080fd5b5061019c6103c7565b60408051918252519081900360200190f35b3480156101ba57600080fd5b5061017373ffffffffffffffffffffffffffffffffffffffff600435811690602435166044356103cc565b3480156101f157600080fd5b506100b660043561056a565b34801561020957600080fd5b506102126105ff565b6040805160ff9092168252519081900360200190f35b34801561023457600080fd5b5061019c73ffffffffffffffffffffffffffffffffffffffff60043516610604565b34801561026257600080fd5b506100cd610616565b34801561027757600080fd5b5061017373ffffffffffffffffffffffffffffffffffffffff6004351660243561064d565b3480156102a857600080fd5b5061019c73ffffffffffffffffffffffffffffffffffffffff60043581169060243516610661565b3360008181526020818152604091829020805434908101909155825190815291517fe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c9281900390910190a2565b60408051808201909152600b81527f577261707065642046696c000000000000000000000000000000000000000000602082015281565b33600081815260016020908152604080832073ffffffffffffffffffffffffffffffffffffffff8716808552908352818420869055815186815291519394909390927f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925928290030190a350600192915050565b303190565b73ffffffffffffffffffffffffffffffffffffffff83166000908152602081905260408120548211156103fe57600080fd5b73ffffffffffffffffffffffffffffffffffffffff84163314801590610474575073ffffffffffffffffffffffffffffffffffffffff841660009081526001602090815260408083203384529091529020547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff14155b156104ee5773ffffffffffffffffffffffffffffffffffffffff841660009081526001602090815260408083203384529091529020548211156104b657600080fd5b73ffffffffffffffffffffffffffffffffffffffff841660009081526001602090815260408083203384529091529020805483900390555b73ffffffffffffffffffffffffffffffffffffffff80851660008181526020818152604080832080548890039055938716808352918490208054870190558351868152935191937fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef929081900390910190a35060019392505050565b3360009081526020819052604090205481111561058657600080fd5b33600081815260208190526040808220805485900390555183156108fc0291849190818181858888f193505050501580156105c5573d6000803e3d6000fd5b5060408051828152905133917f7fcf532c15f0a6db0bd6d0e038bea71d30d808c7d98cb3bf7268a95bf5081b65919081900360200190a250565b601281565b60006020819052908152604090205481565b60408051808201909152600481527f5746494c00000000000000000000000000000000000000000000000000000000602082015281565b600061065a3384846103cc565b9392505050565b6001602090815260009283526040808420909152908252902054815600a165627a7a72305820ed0e683700b9693a022ce75e95f2ac8c09ae7d7b8fd523474d464f18f537cfee0029",
+  "deployedBytecode": "0x6080604052600436106100ae5763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166306fdde0381146100b8578063095ea7b31461014257806318160ddd1461018757806323b872dd146101ae5780632e1a7d4d146101e5578063313ce567146101fd57806370a082311461022857806395d89b4114610256578063a9059cbb1461026b578063d0e30db0146100ae578063dd62ed3e1461029c575b6100b66102d0565b005b3480156100c457600080fd5b506100cd61031d565b6040805160208082528351818301528351919283929083019185019080838360005b838110156101075781810151838201526020016100ef565b50505050905090810190601f1680156101345780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34801561014e57600080fd5b5061017373ffffffffffffffffffffffffffffffffffffffff60043516602435610354565b604080519115158252519081900360200190f35b34801561019357600080fd5b5061019c6103c7565b60408051918252519081900360200190f35b3480156101ba57600080fd5b5061017373ffffffffffffffffffffffffffffffffffffffff600435811690602435166044356103cc565b3480156101f157600080fd5b506100b660043561056a565b34801561020957600080fd5b506102126105ff565b6040805160ff9092168252519081900360200190f35b34801561023457600080fd5b5061019c73ffffffffffffffffffffffffffffffffffffffff60043516610604565b34801561026257600080fd5b506100cd610616565b34801561027757600080fd5b5061017373ffffffffffffffffffffffffffffffffffffffff6004351660243561064d565b3480156102a857600080fd5b5061019c73ffffffffffffffffffffffffffffffffffffffff60043581169060243516610661565b3360008181526020818152604091829020805434908101909155825190815291517fe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c9281900390910190a2565b60408051808201909152600b81527f577261707065642046696c000000000000000000000000000000000000000000602082015281565b33600081815260016020908152604080832073ffffffffffffffffffffffffffffffffffffffff8716808552908352818420869055815186815291519394909390927f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925928290030190a350600192915050565b303190565b73ffffffffffffffffffffffffffffffffffffffff83166000908152602081905260408120548211156103fe57600080fd5b73ffffffffffffffffffffffffffffffffffffffff84163314801590610474575073ffffffffffffffffffffffffffffffffffffffff841660009081526001602090815260408083203384529091529020547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff14155b156104ee5773ffffffffffffffffffffffffffffffffffffffff841660009081526001602090815260408083203384529091529020548211156104b657600080fd5b73ffffffffffffffffffffffffffffffffffffffff841660009081526001602090815260408083203384529091529020805483900390555b73ffffffffffffffffffffffffffffffffffffffff80851660008181526020818152604080832080548890039055938716808352918490208054870190558351868152935191937fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef929081900390910190a35060019392505050565b3360009081526020819052604090205481111561058657600080fd5b33600081815260208190526040808220805485900390555183156108fc0291849190818181858888f193505050501580156105c5573d6000803e3d6000fd5b5060408051828152905133917f7fcf532c15f0a6db0bd6d0e038bea71d30d808c7d98cb3bf7268a95bf5081b65919081900360200190a250565b601281565b60006020819052908152604090205481565b60408051808201909152600481527f5746494c00000000000000000000000000000000000000000000000000000000602082015281565b600061065a3384846103cc565b9392505050565b6001602090815260009283526040808420909152908252902054815600a165627a7a72305820ed0e683700b9693a022ce75e95f2ac8c09ae7d7b8fd523474d464f18f537cfee0029",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
