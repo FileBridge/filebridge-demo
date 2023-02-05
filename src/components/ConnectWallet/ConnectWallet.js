@@ -1,18 +1,30 @@
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import React from 'react'
 import styled from 'styled-components';
-import { useAccount } from 'wagmi';
+import { useAccount, useContractRead } from 'wagmi';
+import bridgeContract from "../assets/FileBridge.json"
 
-export const ConnectWallet = ({approval, checkApproval, amount, bridge}) => {
+export const ConnectWallet = ({approval, amount, bridge, tokenContract}) => {
 
-    const { isDisconnected } = useAccount()
+    const { isDisconnected, address } = useAccount()
     const { openConnectModal } = useConnectModal();
+
+    const {data} = useContractRead({
+        address: tokenContract.address,
+        abi: tokenContract.abi,
+        functionName: 'allowance',
+        args: [address, bridgeContract.address],
+    })
+   
+
     const handleClick = () => {
         if (isDisconnected) {
            openConnectModal()
         } else {
-            console.log(approval)
-            // approval?.()
+            if(data._hex === "0x00") {
+                approval()
+            }
+            
             bridge?.()
         }
     }

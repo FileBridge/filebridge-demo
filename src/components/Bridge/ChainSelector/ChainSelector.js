@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import { useBalance, useAccount, useNetwork } from 'wagmi';
+import { useBalance, useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
+import { Flex } from '../../Flex/index.js';
+import { fetchBalance } from '@wagmi/core'
 import { chains } from '../../../constants/chains.js';
-import { currencies } from '../../../constants/currencies.js';
-import { FlexCol, Flex } from '../../Flex/index.js'
 
-export const ChainSelector = ({ defaultChain, defaultCurrency }) => {
+
+export const ChainSelector = ({ defaultChain, hideBalance }) => {
+
     const { address, isConnecting, isDisconnected, isConnected } = useAccount()
-    const { chain } = useNetwork()
-    const balance = useBalance({
-        address: address
+
+    const { switchNetwork } = useSwitchNetwork({
+        chainId: defaultChain?.chainId,
     })
+    const { chain } = useNetwork()
 
     const [value, setValue] = useState('')
     const [selectedChain, setSelectedChain] = useState(defaultChain)
-    const [selectedCurrency, setSelectedCurrency] = useState(defaultCurrency)
+    const [selectedCurrency, setSelectedCurrency] = useState(defaultChain[0]?.currency)
+    const [balance, setBalance] = useState('')
+
     const setMaxCurrency = () => {
         setValue(balance?.data?.formatted)
     }
@@ -30,35 +35,74 @@ export const ChainSelector = ({ defaultChain, defaultCurrency }) => {
     useEffect(() => {
 
         setSelectedChain(defaultChain)
-        setSelectedCurrency(defaultCurrency)
+        setSelectedCurrency(defaultChain.currencies[0])
+        getTokenBalance(defaultChain.currencies[0].address)
 
     }, [defaultChain])
 
+    const handleNetworkSwitch = (e) => {
+        const chain = JSON.parse(e)
+        setSelectedChain(chain)
+        if (!hideBalance) {
+            switchNetwork(chain?.chainId)
+        }
+        handleCurrency(JSON.stringify(chain.currencies[0]))
+        getTokenBalance()
+    }
+
+    const handleCurrency = (e) => {
+        const currency = JSON.parse(e)
+        setSelectedCurrency(currency)
+        getTokenBalance(currency.address)
+    }
+
+    const getTokenBalance = async (tokenAddress) => {
+        const balance = await fetchBalance({
+            address: address,
+            token: tokenAddress,
+
+        })
+        setBalance(balance)
+    }
+
+    useEffect(() => {
+        getTokenBalance(selectedCurrency?.address)
+    }, [balance])
 
     return (
         <Wrapper>
             <ChainInformation>
                 <Flex>
-                    <img src={selectedChain.icon} width={34} height={34} />
-                    <select defaultValue={selectedChain?.network}>
+                    <img src={selectedChain?.icon} width={34} height={34} />
+                    <select defaultValue={selectedChain?.network} onChange={(e) => handleNetworkSwitch(e.target.value)} value={JSON.stringify(selectedChain)}>
                         {chains.map((chain) => (
-                            <option value={chain?.network} title={chain?.id} onSelect={() => setSelectedChain(chain)}>{chain?.network}</option>
+
+                            <option value={JSON.stringify(chain)} title={chain?.id} onChange={() => {
+                                setSelectedChain(chain)
+                            }}>{chain?.network}</option>
 
                         ))}
                     </select>
-                    <p>Balance: <span>{(isConnected && selectedChain?.id == chain.id) ? (balance?.data?.formatted + ' ' + balance?.data?.symbol) : (0)}</span></p>
+                    {!hideBalance && (
+                        <p><span>{(isConnected && selectedChain?.chainId == chain.id) ? ('Balance: ' + balance?.formatted.slice(0, 6) + ' ' + balance?.symbol) : (<span>Change network</span>)}</span></p>
+                    )}
                 </Flex>
             </ChainInformation>
             <CurrencyData>
                 <Flex>
                     <img src={selectedCurrency?.icon} width={34} height={34} />
-                    <SelectCurrency defaultValue={selectedCurrency?.currency}>
-                        {currencies.map((currency) => (
-                            <option value={currency?.currency} onSelect={() => setSelectedChain(currency?.chainId)}>{currency?.currency}</option>
+                    <SelectCurrency defaultValue={selectedCurrency} onChange={e => handleCurrency(e.target.value)} value={JSON.stringify(selectedCurrency)}>
+                        {chains.filter((chain) => (chain.chainId == selectedChain.chainId)).pop()?.currencies.map((currency) => (
+                            <>
+                                <option value={JSON.stringify(currency)} onChange={() => setSelectedChain(currency?.chainId)}>{currency?.currency}</option>
+                            </>
+
                         ))}
                     </SelectCurrency>
                     <CurrencyInput value={value == balance?.data?.formatted ? value : value} onChange={(e) => handleTokenQuantity(e.target.value)} />
-                    <p style={{ textDecoration: 'underline', color: '#FB118E', cursor: 'pointer', marginRight: '20px' }} onClick={() => setMaxCurrency()}>MAX</p>
+                    {!hideBalance && (
+                        <p style={{ textDecoration: 'underline', color: '#FB118E', cursor: 'pointer', marginRight: '20px' }} onClick={() => setMaxCurrency()}>MAX</p>
+                    )}
                 </Flex>
             </CurrencyData>
         </Wrapper>

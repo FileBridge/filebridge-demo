@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
+import { useAccount } from 'wagmi';
 import { Bridge } from './components/Bridge/Bridge';
 import { Navbar } from './components/Navbar/Navbar';
 
 export const FileBridge = () => {
-
+    const { address } = useAccount()
     return (
         <>
             <Navbar />
             <Oscillate>
                 <BridgeWrapper>
-                    <Bridge />
+                    <Bridge loggedAddress={address}/>
                 </BridgeWrapper>
             </Oscillate>
         </>

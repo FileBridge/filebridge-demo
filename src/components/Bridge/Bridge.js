@@ -2,6 +2,7 @@ import { ethers } from "ethers"
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import {
+    useAccount,
     useContractWrite,
     usePrepareContractWrite,
 } from "wagmi"
@@ -11,7 +12,6 @@ import { ConnectWallet } from "../ConnectWallet/ConnectWallet"
 import { BridgeHeader } from "./BridgeHeader/BridgeHeader"
 import { BridgeType } from "./BridgeType/BridgeType"
 import { ChainSelector } from "./ChainSelector/ChainSelector"
-import { useFeeData } from 'wagmi'
 import bridgeContract from "../assets/FileBridge.json"
 import FileswapV2Factory from "../assets/FileswapV2Factory.json"
 import FileswapV2Router02 from "../assets/FileswapV2Router02.json"
@@ -19,50 +19,39 @@ import FToken from "../assets/FToken.json"
 import Token from "../assets/Token.json"
 
 export const Bridge = () => {
-
-    const swapChains = () => {}
-    const [maxPriorityFeePerGas, setMaxPriorityFeePerGas] = useState(0)
-    const { data, isError, isLoading } = useFeeData()
-
-    useEffect(() => {
-      setMaxPriorityFeePerGas(data?.maxPriorityFeePerGas)
     
-      return () => {
-        setMaxPriorityFeePerGas(0)
-      }
-
-    }, [data])
+    const swapChains = () => { }
     
+
+    const { address } = useAccount()
+    const [ fromChain, setFromChain ] = useState(chains[0])
+
+    const [ toChain, setToChain ] = useState(chains[1])
 
     // FToken = Filecoin token (Wrapped Filecoin)
     // Token = DAI token, or any other token on ERC-20 network
-    
-    // await fileBridgeContract.initialize(deployer, [guardian], 1, {
-    //     maxPriorityFeePerGas: gasData.maxPriorityFeePerGas!,
-    // })
 
     const { config } = usePrepareContractWrite({
         address: Token.address,
         abi: Token.abi,
         functionName: 'approve',
         args: [bridgeContract.address, ethers.utils.parseEther('1')],
-      })
-   
-      // args: spender (BridgeContract address), amount (1 FToken)
-    const { config : bridgeConfig } = usePrepareContractWrite({
+    })
+
+    // args: spender (BridgeContract address), amount (1 FToken)
+    const { config: bridgeConfig } = usePrepareContractWrite({
         address: bridgeContract.address,
         abi: bridgeContract.abi,
         functionName: 'depositToken',
-        args: ['0x36140eEE3893C84886EdC687D598dBD7Cccd5534', 80001, Token.address, ethers.utils.parseEther('1')],
+        args: [address, 3141, Token.address, ethers.utils.parseEther('1')],
     })
 
-    console.log(bridgeConfig)
-
     const { write } = useContractWrite(config)
-    const { write : bridgeWrite } = useContractWrite(bridgeConfig)
+    const { write: bridgeWrite } = useContractWrite(bridgeConfig)
 
     const [type, setType] = useState('token');
 
+    
     return (
         <>
             <BridgeType type={type} setType={setType} />
@@ -73,8 +62,7 @@ export const Bridge = () => {
                         <>
                             <h1>From</h1>
                             <ChainSelector
-                                defaultChain={chains[0]}
-                                defaultCurrency={currencies[0]}
+                                defaultChain={fromChain}
                             />
                         </>
                         <>
@@ -89,11 +77,11 @@ export const Bridge = () => {
                         <>
                             <h1>To</h1>
                             <ChainSelector
-                                defaultChain={chains[1]}
-                                defaultCurrency={currencies[2]}
+                                defaultChain={toChain}
+                                hideBalance={true}
                             />
                         </>
-                        <ConnectWallet approval={write} bridge={bridgeWrite}/>
+                        <ConnectWallet approval={write} bridge={bridgeWrite} tokenContract={Token}/>
                     </BridgeContent>
                 ) : (
                     <div
