@@ -1,10 +1,11 @@
 import "@rainbow-me/rainbowkit/styles.css"
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit"
 import { configureChains, createClient, goerli, WagmiConfig } from "wagmi"
-import { mainnet, polygon, filecoin, filecoinHyperspace, polygonMumbai } from "wagmi/chains"
+import { filecoinHyperspace, polygonMumbai } from "wagmi/chains"
 import { alchemyProvider } from "wagmi/providers/alchemy"
 import { publicProvider } from "wagmi/providers/public"
 import { FileBridge } from "./FileBridge"
+import { Toaster } from "react-hot-toast"
 
 function App() {
     const { chains, provider } = configureChains(
@@ -26,6 +27,7 @@ function App() {
     return (
         <WagmiConfig client={wagmiClient}>
             <RainbowKitProvider chains={chains}>
+                <Toaster />
                 <FileBridge />
             </RainbowKitProvider>
         </WagmiConfig>

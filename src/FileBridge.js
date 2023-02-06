@@ -1,18 +1,27 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { useAccount } from 'wagmi';
 import { Bridge } from './components/Bridge/Bridge';
 import { Navbar } from './components/Navbar/Navbar';
+import { Swap } from './components/Swap/Swap';
 
 export const FileBridge = () => {
-    const { address } = useAccount()
+
+    const [type, setType] = useState('Bridge');
+
     return (
         <>
-            <Navbar />
+            <Navbar value={type} setValue={setType} />
             <Oscillate>
-                <BridgeWrapper>
-                    <Bridge loggedAddress={address}/>
-                </BridgeWrapper>
+                {type === "Bridge" ? (
+                    <Wrapper>
+                        <Bridge />
+                    </Wrapper>
+                ) : (
+                    <Wrapper>
+                        <Swap />
+                    </Wrapper>
+                )}
+
             </Oscillate>
         </>
     )
@@ -32,7 +41,7 @@ const Oscillate = styled.div`
     /* margin-top: 20px; */
 `;
 
-const BridgeWrapper = styled.div`
+const Wrapper = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
