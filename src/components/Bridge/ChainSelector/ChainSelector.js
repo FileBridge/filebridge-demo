@@ -20,7 +20,7 @@ export const ChainSelector = ({ defaultChain, hideBalance, hideChain, getChain, 
     const [balance, setBalance] = useState('')
 
     const setMaxCurrency = () => {
-        setValue(balance?.data?.formatted)
+        setValue(balance?.formatted)
     }
 
     const handleTokenQuantity = (value) => {

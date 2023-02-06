@@ -15,7 +15,8 @@ export const CurrencySelector = ({ selectedChain: swapChain, hideBalance, hideCh
     const [balance, setBalance] = useState('')
     const [selectedCurrency, setSelectedCurrency] = useState(swapChain?.currencies[0])
     const setMaxCurrency = () => {
-        setValue(balance?.data?.formatted)
+        setValue(balance?.formatted)
+        getAmount(balance?.formatted)
     }
 
     const handleTokenQuantity = (value) => {

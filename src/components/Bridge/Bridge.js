@@ -34,7 +34,7 @@ export const Bridge = () => {
         address: currency.address,
         abi: Token.abi,
         functionName: 'approve',
-        args: [bridgeContract.address, ethers.utils.parseEther(amount)],
+        args: [bridgeContract.address, ethers.utils.parseEther(amount == '' ? '0' : amount)],
     })
 
     // args: spender (BridgeContract address), amount (1 FToken)
@@ -42,7 +42,7 @@ export const Bridge = () => {
         address: bridgeContract.address,
         abi: bridgeContract.abi,
         functionName: 'depositToken',
-        args: [address, toChain.chainId, currency?.address, ethers.utils.parseEther(amount)],
+        args: [address, toChain.chainId, currency?.address, ethers.utils.parseEther(amount == '' ? '0' : amount)],
     })
 
     const { write } = useContractWrite(config)
