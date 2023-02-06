@@ -1,5 +1,5 @@
-import { ethers } from "ethers"
 import React, { useEffect, useState } from "react"
+import { ethers } from "ethers"
 import styled from "styled-components"
 import {
     useAccount,
@@ -7,7 +7,6 @@ import {
     usePrepareContractWrite,
 } from "wagmi"
 import { chains } from "../../constants/chains"
-import { currencies } from "../../constants/currencies"
 import { ConnectWallet } from "../ConnectWallet/ConnectWallet"
 import { BridgeHeader } from "./BridgeHeader/BridgeHeader"
 import { BridgeType } from "./BridgeType/BridgeType"
@@ -25,17 +24,17 @@ export const Bridge = () => {
 
     const { address } = useAccount()
     const [ fromChain, setFromChain ] = useState(chains[0])
-
     const [ toChain, setToChain ] = useState(chains[1])
-
+    const [ amount, setAmount ] = useState("0")
+    const [ currency, setCurrency] = useState(chains[0]?.currencies[1])
     // FToken = Filecoin token (Wrapped Filecoin)
     // Token = DAI token, or any other token on ERC-20 network
-
+    
     const { config } = usePrepareContractWrite({
-        address: Token.address,
+        address: currency.address,
         abi: Token.abi,
         functionName: 'approve',
-        args: [bridgeContract.address, ethers.utils.parseEther('1')],
+        args: [bridgeContract.address, ethers.utils.parseEther(amount)],
     })
 
     // args: spender (BridgeContract address), amount (1 FToken)
@@ -43,7 +42,7 @@ export const Bridge = () => {
         address: bridgeContract.address,
         abi: bridgeContract.abi,
         functionName: 'depositToken',
-        args: [address, 3141, Token.address, ethers.utils.parseEther('1')],
+        args: [address, toChain.chainId, currency?.address, ethers.utils.parseEther(amount)],
     })
 
     const { write } = useContractWrite(config)
@@ -51,7 +50,12 @@ export const Bridge = () => {
 
     const [type, setType] = useState('token');
 
-    
+    useEffect(() => {
+        console.log('hello',fromChain.chainId, toChain.chainId)
+        return() => {
+            console.log('bye')
+        }
+    }, [toChain, fromChain])
     return (
         <>
             <BridgeType type={type} setType={setType} />
@@ -63,6 +67,8 @@ export const Bridge = () => {
                             <h1>From</h1>
                             <ChainSelector
                                 defaultChain={fromChain}
+                                getAmount={setAmount}
+                                getCurrency={setCurrency}
                             />
                         </>
                         <>
@@ -79,9 +85,10 @@ export const Bridge = () => {
                             <ChainSelector
                                 defaultChain={toChain}
                                 hideBalance={true}
+                                getChain={setToChain}
                             />
                         </>
-                        <ConnectWallet approval={write} bridge={bridgeWrite} tokenContract={Token}/>
+                        <ConnectWallet approval={write} bridge={bridgeWrite} tokenContract={Token} fromChain={fromChain} toChain={toChain}/>
                     </BridgeContent>
                 ) : (
                     <div

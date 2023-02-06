@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import styles from "./Navbar.module.css";
 
-export const Navbar = () => {
+export const Navbar = ({value, setValue}) => {
   console.log(styles)
 
-  const [value, setValue] = useState('Bridge');
+  // const [value, setValue] = useState('Bridge');
 
   const handleOnClick = (e) => {
     setValue(e.target.innerHTML);
