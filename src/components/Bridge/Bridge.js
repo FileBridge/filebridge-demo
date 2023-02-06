@@ -12,16 +12,12 @@ import { BridgeHeader } from "./BridgeHeader/BridgeHeader"
 import { BridgeType } from "./BridgeType/BridgeType"
 import { ChainSelector } from "./ChainSelector/ChainSelector"
 import bridgeContract from "../assets/FileBridge.json"
-import FileswapV2Factory from "../assets/FileswapV2Factory.json"
-import FileswapV2Router02 from "../assets/FileswapV2Router02.json"
-import FToken from "../assets/FToken.json"
 import Token from "../assets/Token.json"
 
 export const Bridge = () => {
     
     const swapChains = () => { }
     
-
     const { address } = useAccount()
     const [ fromChain, setFromChain ] = useState(chains[0])
     const [ toChain, setToChain ] = useState(chains[1])
@@ -29,7 +25,7 @@ export const Bridge = () => {
     const [ currency, setCurrency] = useState(chains[0]?.currencies[1])
     // FToken = Filecoin token (Wrapped Filecoin)
     // Token = DAI token, or any other token on ERC-20 network
-    
+
     const { config } = usePrepareContractWrite({
         address: currency.address,
         abi: Token.abi,
@@ -45,15 +41,15 @@ export const Bridge = () => {
         args: [address, toChain.chainId, currency?.address, ethers.utils.parseEther(amount == '' ? '0' : amount)],
     })
 
-    const { write } = useContractWrite(config)
-    const { write: bridgeWrite } = useContractWrite(bridgeConfig)
+    const { write, data: approvalData } = useContractWrite(config)
+    const { write: bridgeWrite, data: bridgeData } = useContractWrite(bridgeConfig)
 
     const [type, setType] = useState('token');
 
     useEffect(() => {
-        console.log('hello',fromChain.chainId, toChain.chainId)
+        console.log('This are the chains',fromChain.chainId, toChain.chainId)
         return() => {
-            console.log('bye')
+            console.log('unmounting')
         }
     }, [toChain, fromChain])
     return (
@@ -69,6 +65,7 @@ export const Bridge = () => {
                                 defaultChain={fromChain}
                                 getAmount={setAmount}
                                 getCurrency={setCurrency}
+                                getChain={setFromChain}
                             />
                         </>
                         <>
@@ -88,7 +85,7 @@ export const Bridge = () => {
                                 getChain={setToChain}
                             />
                         </>
-                        <ConnectWallet approval={write} bridge={bridgeWrite} tokenContract={Token} fromChain={fromChain} toChain={toChain}/>
+                        <ConnectWallet approval={write} bridge={bridgeWrite} currencyAddress={currency.address} fromChain={fromChain} toChain={toChain} bridgeData={bridgeData} approvalData={approvalData}/>
                     </BridgeContent>
                 ) : (
                     <div

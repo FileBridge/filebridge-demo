@@ -8,19 +8,13 @@ import {
     usePrepareContractWrite,
 } from "wagmi"
 import { chains } from "../../constants/chains"
-import { ConnectWallet } from "../ConnectWallet/ConnectWallet"
-import { ChainSelector } from "../Bridge/ChainSelector/ChainSelector"
-import bridgeContract from "../assets/FileBridge.json"
 import FileswapV2Factory from "../assets/FileswapV2Factory.json"
 import FileswapV2Router02 from "../assets/FileswapV2Router02.json"
 import FileswapV2Pair from "../assets/FileswapV2Pair.json"
 import FToken from "../assets/FToken.json"
-import Token from "../assets/Token.json"
 import { SwapHeader } from "./SwapHeader"
 import { SwapButton } from "./SwapButton"
-import { TokenInput } from "./TokenInput"
 import { CurrencySelector } from "./CurrencySelector"
-const { provider, utils } = require('ethers');
 
 export const Swap = () => {
 
@@ -67,7 +61,7 @@ export const Swap = () => {
 
     const { write: swapWrite, data: swapData } = useContractWrite(swapConfig);
     const { write: approveToken, data: approvalData } = useContractWrite(approveTokenConfig);
-    console.log(swapConfig)
+    
     const [type, setType] = useState('token');
 
     const { data: reserveRead } = useContractRead({

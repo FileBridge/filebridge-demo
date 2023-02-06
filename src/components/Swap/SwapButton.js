@@ -27,7 +27,7 @@ export const SwapButton = ({ swapWrite, tokenIn, approval, swapData, approvalDat
     const { isLoading, isSuccess, isError } = useWaitForTransaction({
         hash: swapData?.hash || approvalData?.hash
     })
-
+  
     const handleClick = () => {
         if (isDisconnected) {
             openConnectModal()

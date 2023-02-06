@@ -67,9 +67,9 @@ export const ChainSelector = ({ defaultChain, hideBalance, hideChain, getChain, 
         setBalance(balance)
     }
 
-    useEffect(() => {
-        getTokenBalance(selectedCurrency?.address)
-    }, [balance])
+    useEffect(async () => {
+        await getTokenBalance(selectedCurrency?.address)
+    }, [])
 
     return (
         <Wrapper>
@@ -87,7 +87,7 @@ export const ChainSelector = ({ defaultChain, hideBalance, hideChain, getChain, 
                             ))}
                         </select>
                         {!hideBalance && (
-                            <p><span>{(isConnected && selectedChain?.chainId == chain.id) ? ('Balance: ' + balance?.formatted?.slice(0, 5) + ' ' + balance?.symbol) : (<span>Change network</span>)}</span></p>
+                            <p><span>{(isConnected && selectedChain?.chainId == chain.id) ? ('Balance: ' +balance?.formatted?.slice(0, 5) + ' ' + balance?.symbol) : (<span>Change network</span>)}</span></p>
                         )}
                     </Flex>
                 </ChainInformation>
@@ -115,6 +115,7 @@ export const ChainSelector = ({ defaultChain, hideBalance, hideChain, getChain, 
                 </CurrencyData>
             )}
         </Wrapper>
+        
     )
 }
 
